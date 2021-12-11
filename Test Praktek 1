@@ -1,0 +1,224 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int saldo=0;
+void Menu()
+{
+    int menu;
+    system("cls");
+    printf("WELCOME \n\n");
+    printf("1. Angka Terbesar\n");
+    printf("2. Segitiga\n");
+    printf("3. ATM\n");
+    printf("4. Author\n");
+    printf("5. Exit\n\n");
+
+    printf("Pilihan : "); scanf("%i",&menu);
+    switch(menu)
+    {
+        case 1: Angka(); break;
+        case 2: Segitiga(); break;
+        case 3: ATM(); break;
+        case 4: Author(); break;
+        case 5:
+            system("cls");
+            printf("===== GOODBYE =====");
+            getch();
+            system("taskkill/IM cb_console_runner.exe"); break;
+        default:
+            printf("Input Salah");
+            getch();
+            system("cls");
+            Menu(); break;
+    }
+}
+
+void Angka()
+{
+    printf("===== MENU 1 : Angka Terbesar ===== \n\n");
+    {
+        int angka1, angka2, angka3;
+        printf("Masukkan angka 1: "); scanf("%i", &angka1);
+        printf("Masukkan angka 2: "); scanf("%i", &angka2);
+        printf("Masukkan angka 3: "); scanf("%i", &angka3);
+        printf("\n");
+
+        if (angka1>angka2)
+        {
+            if (angka1>angka3)
+            {
+                printf("Angka terbesar adalah %i", angka1);
+            } else
+            {
+                printf("Angka terbesar adalah %i", angka3);
+            }
+        } else if (angka2>angka3)
+            {
+                printf("Angka terbesar adalah %i", angka2);
+            } else
+            {
+                printf("Angka terbesar adalah %i", angka3);
+            }
+        }
+    getch();
+    system("cls");
+    Menu();
+}
+
+void Segitiga()
+{
+    int x, y, z, a;
+    system("cls");
+    printf("=======  Menu 2: Segitiga  =======\n\n");
+    printf("Masukkan angka: ");scanf("%i",&a);
+    printf("\n");
+    for(x=1; x<=a; x++)
+    {
+        for(y=x; y<=a; y++)
+        {
+            printf(" ");
+        }
+        for(z=1;z<=2*x-1;z++)
+        {
+            if(z%2==1)
+            {
+                printf("*");
+            }
+            else
+            {
+                printf("_");
+            }
+        }
+        printf("\n");
+    }
+    getch();
+    system("cls");
+    Menu();
+}
+
+void ATM()
+{
+    system("cls");
+    printf("=======  Menu 3: ATM  =======\n\n");
+    printf("Masukkan jumlah saldo: ");scanf("%i",&saldo);
+    system("cls");
+    ATMenu();
+}
+
+void ATMenu()
+{
+    int menu;
+    printf("=======  Menu 3: ATM  =======\n\n");
+    printf("Jumlah Saldo: %i\n\n",saldo);
+    printf("1. Tarik\n");
+    printf("2. Setor\n");
+    printf("3. Exit\n");
+    printf("Pilihan: ");scanf("%i",&menu);
+    switch(menu)
+    {
+        case 1: Tarik();break;
+        case 2: Setor();break;
+        case 3: Menu();break;
+        default:
+            printf("Input Salah");
+            getch();
+            system("cls");
+            ATMenu();
+    }
+}
+
+void Tarik()
+{
+    int tarik;
+    system("cls");
+    printf("Masukkan jumlah tarikan: ");scanf("%i",&tarik);
+    if(saldo>=tarik)
+    {
+        saldo-=tarik;
+        printf("Sisa Saldo Anda %i",saldo);
+        getch();
+        system("cls");
+        ATMenu();
+    }
+    else
+    {
+        printf("Saldo Anda Kurang");
+        getch();
+        system("cls");
+        ATMenu();
+    }
+}
+
+void Setor()
+{
+    int setor;
+    system("cls");
+    printf("Masukkan jumlah setoran: ");scanf("%i",&setor);
+    saldo+=setor;
+    printf("Sisa Saldo Anda %i",saldo);
+    getch();
+    system("cls");
+    ATMenu();
+}
+
+void delay( unsigned int value)
+{
+    unsigned int count1 =0;
+    unsigned int count2 = 0;
+
+    for(count1 = 0; count1 < value ; count1++ )
+    {
+        for(count2 = 0; count2 < count1 ; count2++ )
+        {}
+    }
+}
+
+const char rocket[] =
+    "           ^\n\
+          /^\\\n\
+          | |\n\
+          |P|\n\
+          |E|\n\
+          |M|\n\
+          |R|\n\
+          |O|\n\
+          |G|\n\
+          |R|\n\
+          |A|\n\
+         /|M|\\\n\
+        / |A| \\\n\
+       /  |N|  \\\n\
+      /   |-|   \\\n\
+     /    |D|    \\\n\
+    |     | |     |\n\
+     `----\"\"\"----`\n\n\
+    Adriane Athalia\n\n       672019114";
+
+void Author()
+{
+    system("cls");
+    int jumpControlAtBottom = 0;
+    const int someDelay = 10000;
+    int shifControl = 0;
+
+    for (jumpControlAtBottom = 0; jumpControlAtBottom < 50; ++jumpControlAtBottom)
+    {
+        printf("\n");
+    }
+
+    fputs(rocket,stdout);
+
+    for (shifControl = 0; shifControl < 35; ++shifControl)
+    {
+        delay(someDelay);
+        printf("\n");
+    }
+    getch();
+    system("cls");
+    Menu();
+}
+
+void main()
+{
+    Menu();
+}
