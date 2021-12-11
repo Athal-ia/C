@@ -1,0 +1,34 @@
+#include<stdio.h>
+
+int main()
+{
+    int a[5], i, n, j, p;
+    char jwb;
+
+    printf("Jumlah input bilangan : ");scanf("%d", &n);
+    printf("Masukkan bilangan :\n");
+    for (i = 0; i < n; i++)
+    {
+       scanf("%d", &a[i]);
+    }
+
+    printf("Bilangan prima : ");
+    for (i = 0; i < n; i++)
+    {
+       j = 2;
+       p = 1;
+       while (j < a[i])
+       {
+           if (a[i] % j == 0)
+           {
+               p = 0;
+               break;
+           }
+           j++;
+       }
+       if (p == 1)
+       {
+           printf("%d ", a[i]);
+       }
+    }
+}
