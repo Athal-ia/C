@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    int a;
+    {
+        printf("Selamat datang di program segitiga berjalan\n\n");
+        printf("Pilih menu: \n");
+        printf("1. Segitiga biasa (Maksimal 8)\n");
+        printf("2. Segitiga istimewa (Maksimal 5)\n");
+        printf("3. Exit \n\n");
+
+        printf("Masukkan pilihan menu: "); scanf("%i", &a);
+
+        switch(a)
+        {
+            case 1 : printf("Masukkan tinggi segitiga biasa: ");
+            {
+                int a;
+                scanf("%d", &a);
+                for (int x=1; x<=a; x++)
+                {
+                    for (int y=1; y<=x; y++)
+                    {
+                        for (int z=1; z<=x; z++)
+                        {
+                            printf("*");
+                        }
+                        for (int p=1; p<=a-(x-1); p++)
+                        {
+                            printf(" ");
+                        }
+                    }
+                    printf("\n");
+                }
+            }
+
+            case 2 : printf("Masukka tinggi segitiga spesial: ");
+            {
+                int a;
+                scanf("%d", &a);
+                for (int x=1; x<=a; x++)
+                {
+                    for (int y=x; y<=a-1; y++)
+                    {
+                        printf(" ");
+                    }
+                    for (int p=1; p<=x; p++)
+                    {
+                        printf("*");
+                    }
+                printf(" ");
+                for (int p=1; p<=x; p++)
+                {
+                    printf("*");
+                }
+            printf("\n");
+                }
+            }
+
+        }
+    }
+}
