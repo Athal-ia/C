@@ -1,0 +1,230 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct data
+{
+    int id;
+    char nama[50];
+    int stock;
+    char sup[50];
+    int harga;
+    struct data *next;
+}*head, *tail, *current;
+
+insertKepala(int identitas, char namaa[], int stok, char supplier[], int hargaa)
+{
+    current = (struct data*)malloc(sizeof(struct data));
+    current->id = identitas;
+    strcpy(current->nama, namaa);
+    current->stock = stok;
+    strcpy(current->sup, supplier);
+    current->harga = hargaa;
+
+    if(head==NULL)
+    {
+        head=tail=current;
+    }else
+    {
+        current->next = head;
+        head=current;
+    }
+}
+
+insertAkhir(int identitas, char namaa[], int stok, char supplier[], int hargaa)
+{
+    current = (struct data*)malloc(sizeof(struct data));
+    current->id = identitas;
+    strcpy(current->nama, namaa);
+    current->stock = stok;
+    strcpy(current->sup, supplier);
+    current->harga = hargaa;
+
+    if(head==NULL)
+    {
+        head = tail = current;
+    }else
+    {
+        tail->next = current;
+        tail = current;
+    }
+    tail->next = NULL;
+}
+
+void Menu()
+{
+    int menu;int identitas; int stok; char namaa[50]; char supplier[50]; int hargaa; char ide[50];
+
+    printf("===========================\n\n");
+    printf("1. Lihat Data \n");
+    printf("2. Masukkan Data \n");
+    printf("3. Update Data \n");
+    printf("4. Hapus Data \n");
+    printf("5. Bantuan \n");
+    printf("6. Exit \n");
+    printf("\n");
+
+    printf("Pilihan : "); scanf("%i", &menu);
+    printf("\n============================\n\n");
+
+    switch(menu)
+    {
+        case 1:
+                printf("|=================================================================================| \n");
+                printf("|                           ----::::  Gudang  ::::----                            | \n");
+                printf("|=================================================================================| \n");
+                printf("|  ID    |  Barang           |  Stock        |  Supplier        |  Harga          | \n");
+                printf("|=================================================================================| \n");
+                lihat();
+                printf("|=================================================================================| \n");
+                printf("\n");
+                printf("Klik apapun untuk melanjutkan");
+                getch();
+                system("cls");
+                Menu();
+                break;
+
+        case 2: printf("ID Barang     : "); scanf("%d", &identitas);
+                printf("Nama Barang   : "); scanf("%s", &namaa);
+                printf("Jumlah Stock  : "); scanf("%d", &stok);
+                printf("Supplier      : "); scanf("%s", &supplier);
+                printf("Harga Barang  : "); scanf("%d", &hargaa);
+                printf("\n");
+                insertAkhir(identitas,namaa,stok,supplier,hargaa);
+                printf("Klik apapun untuk melanjutkan \n");
+                getch();
+                system("cls");
+                Menu();
+                break;
+
+        case 3: if(head==NULL)
+                {
+                    printf("\nTidak ada data yang dapat di update!\n");
+                }
+                else
+                {
+                    printf("Nama barang yang ingin diganti : "); scanf("%s", &ide);
+                    printf("ID Barang    : "); scanf("%d", &identitas);
+                    printf("Nama Barang  : "); scanf("%s", &namaa);
+                    printf("Jumlah Stock : "); scanf("%d", &stok);
+                    printf("Supplier     : "); scanf("%s", &supplier);
+                    printf("Harga Barang : "); scanf("%d", &hargaa);
+                    update(ide, identitas, namaa, strlen(namaa), stok, supplier, strlen(supplier), hargaa);
+                }
+                printf("\n");
+                printf("Klik apapun untuk melanjutkan");
+                getch();
+                system("cls");
+                Menu();
+                break;
+
+        case 4: if(head==NULL)
+                {
+                    printf("\nTidak ada data yang dapat di hapus!\n");
+                }
+                else
+                {
+                    printf("Nama barang yang ingin dihapus : "); scanf("%s", namaa);
+                    deleteNode(&head, namaa);
+                    printf("Data sudah dihapus \n");
+                }
+
+                printf("\n\n");
+                printf("\nKlik apapun untuk melanjutkan");
+                getch();
+                system("cls");
+                Menu();
+                break;
+
+        case 5: bantuan();
+                break;
+
+        case 6:
+            printf("Good Bye");
+            system("taskkill/IM cb_console_runner.exe");
+
+        default:
+            printf("Pilihan tidak ada");
+            printf("\nKlik apapun untuk melanjutkan");
+            getch();
+            system("cls");
+            Menu();
+            break;
+    }
+}
+
+void update(char ide[], int identitas, char namaa[],int sz1, int stok, char supplier[],int sz2, int hargaa)
+{
+    current = head;
+    while(current!=NULL)
+    {
+        if(strcmp(current->nama, ide) == 0)
+        {
+            for(int i=0;i<=sz1;i++){
+            current->nama[i] = namaa[i];ide = "NULL";}
+            current->id = identitas;
+            current->stock = stok;
+            for(int i=0;i<=sz2;i++){
+            current->sup[i] = supplier[i];}
+            current->harga = hargaa;
+        }
+
+        else
+        {
+            current = current->next;
+        }
+    }
+}
+
+void deleteNode(struct data** ref, char key[])
+{
+  struct data *temp = *ref, *prev;
+  if (temp != NULL && strcmp(temp->nama, key) == 0)
+  {
+    *ref = temp->next;
+    free(temp);
+    return;
+  }
+  while (temp != NULL && strcmp(temp->nama, key) != 0)
+  {
+    prev = temp;
+    temp = temp->next;
+  }
+  if (temp == NULL) return;prev->next = temp->next;free(temp);
+}
+
+void lihat()
+{
+    current = head;
+    if(current==NULL)
+    {
+        printf("\n\n");
+        printf("Tidak ada data!");
+        printf("\n\n");
+    }
+    while(current!=NULL)
+    {
+        printf("|  %-8d  %-17s  %-14d  %-17s  %-14d | \n",
+               current->id,current->nama,current->stock,current->sup,current->harga);
+        current = current->next;
+    }
+}
+
+void bantuan()
+{
+    printf("---------- SELAMAT DATANG DI PUSAT BANTUAN ----------\n\n\n");
+    printf("Untuk info lebih lanjut, silahkan hubungi email dibawah ini : \n\n");
+    printf("672019095@student.uksw.edu \n");
+    printf("672019114@student.uksw.edu \n");
+    printf("\n");
+
+    printf("Klik apapun untuk melanjutkan");
+    getch();
+    system("cls");
+    Menu();
+}
+
+void main()
+{
+    Menu();
+}
