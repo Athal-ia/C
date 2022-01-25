@@ -1,0 +1,46 @@
+#include<stdio.h>
+
+int main() {
+    int i=0;
+    char s[50];
+    printf(">>> PROGRAM SANDI <<<\n\n\n");
+    printf("Masukkan sebuah kalimat dan akhiri dengan ENTER\n");
+    printf("Kalimat tersebut akan disandikan\n\n");
+    printf("Kalimat : ");
+    gets(s);
+    while(s[i]!='\0')
+    {
+        if(s[i]=='A'){s[i]='T';}
+        else if(s[i]=='T'){s[i]='A';}
+
+        if(s[i]=='a'){s[i]='t';}
+        else if(s[i]=='t'){s[i]='a';}
+
+        if(s[i]=='E'){s[i]='M';}
+        else if(s[i]=='M'){s[i]='E';}
+
+        if(s[i]=='e'){s[i]='m';}
+        else if(s[i]=='m'){s[i]='e';}
+
+        if(s[i]=='I'){s[i]='V';}
+        else if(s[i]=='V'){s[i]='I';}
+        if(s[i]=='i'){s[i]='v';}
+        else if(s[i]=='v'){s[i]='i';}
+
+        if(s[i]=='O'){s[i]='S';}
+        else if(s[i]=='S'){s[i]='O';}
+
+        if(s[i]=='o'){s[i]='s';}
+        else if(s[i]=='s'){s[i]='o';}
+
+        if(s[i]=='U'){s[i]='J';}
+        else if(s[i]=='J'){s[i]='U';}
+
+        if(s[i]=='u'){s[i]='j';}
+        else if(s[i]=='j'){s[i]='u';}
+        i++;
+    }
+    printf("\n------------------------------------------------------\n\n");
+    printf("Hasil setelah Disandikan : %s\n\n",s);
+    return 0;
+}
